@@ -64,6 +64,18 @@ const component: React.FC<CategoryItemProps> = ({ item }) => {
             onDeletePress={() => {
               dispatch(deleteCategoryField({ key: item.key, field: v[0] }));
             }}
+            onChangeAttribute={(value, fromBlur) => {
+              if (fromBlur) {
+                dispatch(
+                  updateCategoryFieldName({
+                    key: item.key,
+                    fieldName: v[0],
+                    fieldType: v[1],
+                    value,
+                  })
+                );
+              }
+            }}
             onSubmitEditing={(e) => {
               dispatch(
                 updateCategoryFieldName({

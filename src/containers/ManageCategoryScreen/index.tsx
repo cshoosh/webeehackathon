@@ -21,9 +21,10 @@ export default () => {
       <KeyboardAwareFlatList
         numColumns={isBigScreenValue ? 2 : 1}
         style={styles.containerList}
+        contentContainerStyle={{ paddingBottom: 50 }}
         data={machineTypes}
         key={isBigScreenValue + ""}
-        keyExtractor={(item, index) => isBigScreenValue + index}
+        keyExtractor={(item, index) => isBigScreenValue.toString() + index}
         renderItem={({ item }) => <CategoryItem item={item} />}
       />
       <Button onPress={() => dispatch(addCategory())}>
@@ -38,5 +39,6 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   containerList: {
     flex: 1,
+    paddingBottom: 50,
   },
 });

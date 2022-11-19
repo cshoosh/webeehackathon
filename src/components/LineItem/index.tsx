@@ -9,7 +9,7 @@ export interface LineItemProps {
   dataType: string;
   value: any;
   label: string;
-  onChangeAttribute: (value: any) => void;
+  onChangeAttribute: (value: any, fromBlur: boolean) => void;
   style?: any;
 }
 
@@ -42,7 +42,7 @@ const LineItemComponent: React.FC<LineItemProps> = ({
           value={internalValue}
           label={labelInternal}
           onBlur={() => {
-            setInternalValue(value);
+            onChangeAttribute?.(internalValue, true);
           }}
           {...props}
         />

@@ -4,6 +4,7 @@ import useMachineFilter from "../../libs/customHooks/machineFilter/machineFilter
 import { FlatList, StyleSheet, View } from "react-native";
 import MachineItem from "../MachineItem";
 import { isBigScreen } from "../../libs/helper";
+import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 
 interface MachineItemContainerListProps {
   type: string;
