@@ -24,6 +24,7 @@ if (__DEV__) {
     })
     .setAsyncStorageHandler(AsyncStorage)
     .connect();
+  // @ts-ignore
   reactotron.clear();
 }
 

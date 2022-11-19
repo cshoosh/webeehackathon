@@ -3,7 +3,12 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
+// @ts-ignore
 import Reactotron from "./config/reactotron";
+
+if (__DEV__) {
+  AsyncStorage.removeItem("persist:root");
+}
 
 const persistConfig = {
   key: "root",
@@ -13,6 +18,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const reactotronEnhancer =
+  // @ts-ignore
   Reactotron.createEnhancer != null ? Reactotron.createEnhancer() : null;
 
 export const store = configureStore({

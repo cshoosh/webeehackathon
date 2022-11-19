@@ -13,12 +13,12 @@ export default function AppNavigation() {
   }));
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Navigator initialRouteName="Dashboard">
+        <Drawer.Screen name="Dashboard" component={HomeScreen} />
         {types.map((v) => (
           <Drawer.Screen
             key={v.name}
-            name={v.title || v.name}
+            name={v.name}
             component={MachineTypeEditScreen}
             initialParams={{ machineType: v.name }}
           />

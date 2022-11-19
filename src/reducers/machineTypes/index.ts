@@ -1,13 +1,16 @@
 import { createReducer } from "@reduxjs/toolkit";
 
+export interface Attribute {
+  [attr: string]: number | Date | string | boolean;
+}
+
 export interface MachineTypeState {
   machineType:
     | []
     | [
         {
-          title: string;
           name: string;
-          attr?: {} | { [attr: string]: number | Date | string | boolean };
+          attr?: {};
         }
       ];
 }
@@ -15,8 +18,13 @@ export interface MachineTypeState {
 const initialState: MachineTypeState = {
   machineType: [
     {
-      name: "Bulldozer",
-      title: "Bulldozer Title",
+      name: "Bulldozer2",
+      attr: {
+        weight: "number",
+        model: "string",
+        available: "boolean",
+        date: "date",
+      },
     },
   ],
 };
