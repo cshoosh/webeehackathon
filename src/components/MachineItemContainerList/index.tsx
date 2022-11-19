@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "@rneui/themed";
-import useMachineFilter from "../../libs/customHooks/machineFilter";
+import useMachineFilter from "../../libs/customHooks/machineFilter/machineFilter";
 import { FlatList, StyleSheet, View } from "react-native";
 import MachineItem from "../MachineItem";
 
@@ -14,6 +14,7 @@ const component: React.FC<MachineItemContainerListProps> = ({ type }) => {
   return (
     <FlatList
       data={filtered}
+      keyExtractor={(item) => item.key}
       renderItem={({ item }) => <MachineItem item={item} />}
       ListEmptyComponent={(props) => (
         <View style={styles.container}>

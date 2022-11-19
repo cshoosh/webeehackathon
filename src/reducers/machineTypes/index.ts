@@ -7,21 +7,21 @@ export interface Attribute {
 export interface MachineTypeState {
   machineType:
     | []
-    | [
-        {
-          name: string;
-          attr?: {};
-        }
-      ];
+    | {
+        name: string;
+        title?: string;
+        attr?: {};
+      }[];
 }
 
 const initialState: MachineTypeState = {
   machineType: [
     {
       name: "Bulldozer2",
+      title: "Model",
       attr: {
         weight: "number",
-        model: "string",
+        dummy: "string",
         available: "boolean",
         date: "date",
       },

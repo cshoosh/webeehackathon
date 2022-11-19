@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../reducers";
+import { RootState } from "../../../reducers";
 import { useEffect, useState } from "react";
-import { Attribute } from "../../reducers/machineTypes";
+import R from "ramda";
 
 export const mapAttrToMachine = (
   machineAttrs: any | undefined = {},
@@ -20,11 +20,6 @@ export const mapAttrToMachine = (
   );
 };
 
-const filterTypeFromArray = (type: string, machineTypes: any) => {
-  // @ts-ignore
-  return machineTypes.find((v) => v.name === type)?.attr;
-};
-
 const useMachineFilter = (type: string) => {
   const { machines, machineTypes } = useSelector((state: RootState) => ({
     machines: state.machines.machines,
@@ -35,17 +30,17 @@ const useMachineFilter = (type: string) => {
   >([]);
 
   useEffect(() => {
+    const machineTypeAttr = machineTypes.find((v) => v.name === type);
     const mapped = machines
       .filter((machine) => machine.type === type)
       .map((machine) => ({
         name: machine.title,
-        attr: mapAttrToMachine(
-          machine.attr,
-          filterTypeFromArray(type, machineTypes)
-        ),
+        titleField: machineTypeAttr?.title,
+        key: machine.key,
+        attr: mapAttrToMachine(machine.attr, machineTypeAttr?.attr),
       }));
 
-    setFilter(mapped);
+    setFilter(R.reverse(mapped));
   }, [type, machines, machineTypes]);
 
   return filtered;
