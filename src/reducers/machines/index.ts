@@ -1,8 +1,12 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-interface MachineState {}
+interface MachineState {
+  dummy: string;
+}
 
-const initialState: MachineState = {};
+const initialState: MachineState = {
+  dummy: "Default",
+};
 
 const machineReducer = createReducer(initialState, (builder) => {
   builder.addDefaultCase((state, action) => {});

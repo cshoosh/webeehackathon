@@ -1,6 +1,12 @@
-import { registerRootComponent } from 'expo';
+import { registerRootComponent } from "expo";
 
-import App from './src/App';
+if (__DEV__) {
+  import("./src/config/reactotron").then(() =>
+    console.log("Reactotron Configured")
+  );
+}
+
+import App from "./src/App";
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
