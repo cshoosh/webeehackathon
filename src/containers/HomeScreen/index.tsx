@@ -6,7 +6,7 @@ import MachineItemContainerList from "../../components/MachineItemContainerList"
 
 export default function () {
   const { types } = useSelector((state: RootState) => ({
-    types: state.machineTypes.machineType,
+    types: state.machineTypes.machineType.filter((v) => v.name),
   }));
   return (
     <FlatList

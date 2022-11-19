@@ -4,20 +4,25 @@ import { useEffect, useState } from "react";
 import R from "ramda";
 
 export const mapAttrToMachine = (
-  machineAttrs: any | undefined = {},
-  actualAttributes: any | undefined = {}
+  machineAttrs: Array<string[]> | undefined,
+  actualAttributes: Array<string[]> | undefined
 ) => {
-  return (
-    Array.from(
-      new Set([...Object.keys(actualAttributes), ...Object.keys(machineAttrs)]) // Use Set to filter the duplicates
-    )
-      // Keep machine attributes in second parameter as we don't want to lose the values
-      .filter((v) => Object.keys(actualAttributes).includes(v))
-      .map((v) => ({
-        [v]: { value: machineAttrs[v], type: actualAttributes[v] },
-      }))
-      .reduce((p, c) => ({ ...c, ...p }), {})
-  );
+  // @ts-ignore
+
+  return (actualAttributes || [])
+    .map((v) => {
+      // @ts-ignore
+      return {
+        [v[0]]: {
+          value: R.compose(
+            R.path(["1"]),
+            R.find((f) => f[0] === v[0])
+          )(machineAttrs),
+          type: v[1],
+        },
+      };
+    })
+    .reduce((p, c) => ({ ...c, ...p }), {});
 };
 
 const useMachineFilter = (type: string) => {
@@ -37,7 +42,7 @@ const useMachineFilter = (type: string) => {
         name: machine.title,
         titleField: machineTypeAttr?.title,
         key: machine.key,
-        attr: mapAttrToMachine(machine.attr, machineTypeAttr?.attr),
+        attr: mapAttrToMachine(R.toPairs(machine.attr), machineTypeAttr?.attr),
       }));
 
     setFilter(R.reverse(mapped));

@@ -5,6 +5,7 @@ import { Button, Card, CheckBox, Icon, Input } from "@rneui/themed";
 import DatePicker from "react-native-date-picker";
 import { useDispatch } from "react-redux";
 import { deleteItem, updateField, updateTitle } from "../../reducers/machines";
+import { isBigScreen } from "../../libs/helper";
 
 interface MachineItemProps {
   item: any;
@@ -12,19 +13,20 @@ interface MachineItemProps {
 
 const component: React.FC<MachineItemProps> = ({ item }) => {
   const dispatch = useDispatch();
+  const isBigSize = isBigScreen();
   return (
-    <Card>
+    <Card containerStyle={{ width: isBigSize ? "45%" : undefined }}>
       <Card.Title>{item.name}</Card.Title>
       <Card.Divider />
       <LineItem
         label={item.titleField}
         dataType={"title"}
         value={item.name}
-        onChangeAttribute={(v) => {
+        onChangeAttribute={(v: string) => {
           dispatch(updateTitle({ key: item.key, title: v }));
         }}
       />
-      {Object.keys(item.attr).map((v: any) => (
+      {Object.keys(item.attr || {}).map((v: any) => (
         <LineItem
           key={v}
           label={v}

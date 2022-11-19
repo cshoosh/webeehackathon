@@ -7,7 +7,7 @@ import rootReducer from "./reducers";
 import Reactotron from "./config/reactotron";
 
 if (__DEV__) {
-  AsyncStorage.removeItem("persist:root");
+  // AsyncStorage.removeItem("persist:root");
 }
 
 const persistConfig = {
